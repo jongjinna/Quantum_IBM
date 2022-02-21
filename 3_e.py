@@ -1,26 +1,42 @@
 import numpy as np
 from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute
-from qiskit import BasicAer
-from qiskit.tools.visualization import plot_state_city
+# from qiskit import BasicAer
+# from qiskit.tools.visualization import plot_state_city
 
+# 2 큐비트 양자 레지스터 생성
 q = QuantumRegister(2, 'q')
+
+# 레지스터가 양자회로에서 동작하도록
 circuit = QuantumCircuit(q)
+
+# 큐비트 0을 아다마르 게이트 (Gate H)를 사용해 중첩을 만듦
 circuit.h(0)
+
+# 큐비트 0을 control하고 큐비트 1을 target하는 CX(Controlled-NOT) 게이트, Bell 상태
 circuit.cx(0, 1)
 
-print(circuit.draw())
+# 2비트의 고전 레지스터 생성
+c = ClassicalRegister(2, 'c')
 
-backend = BasicAer.get_backend('statevector_simulator')
+# 양자+고전 회로 설정 베리어 생성
+meas = QuantumCircuit(q, c)
+meas.barrier(q)
 
-job = execute(circuit, backend)
+# 각 큐비트를 측정
+meas.measure(q, c)
 
-result = job.result()
+# 고전적 비트에 큐비트를 측정한 정보가 나오도록 더하기 연산 조작
+# 고전적 비트는 0으로 초기화된 상태에서 큐비트의 측정값을 덧셈하여 값을 가져옴
+qc = meas + circuit
 
-outputstate = result.get_statevector(circuit, decimals=2)
+print(qc.draw())
 
-print(outputstate)
+circuit = QuantumCircuit(2, 2)
 
-plot_state_city(outputstate)
+qc = meas + circuit
 
-# Note : https://m.blog.naver.com/PostView.naver?blogId=simhc0714&logNo=221567009487&targetKeyword=&targetRecommendationCode=1
+print(qc.draw())
+
+
+# Note : https://m.blog.naver.com/simhc0714/221570451068
