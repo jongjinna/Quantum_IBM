@@ -23,3 +23,5 @@ outputstate = result.get_statevector(circuit, decimals=2)
 print(outputstate)
 
 plot_state_city(outputstate)
+
+# Note : https://m.blog.naver.com/PostView.naver?blogId=simhc0714&logNo=221567009487&targetKeyword=&targetRecommendationCode=1
