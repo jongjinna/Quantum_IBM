@@ -63,5 +63,6 @@ print(qc_ha.draw())
 
 qobj = assemble(qc_ha)
 counts = sim.run(qobj).result().get_counts()
-plot_histogram(counts)
-plt.show()
+print(counts)
+# plot_histogram(counts)
+# plt.show()

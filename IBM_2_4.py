@@ -71,4 +71,73 @@ qc.cx(a,b)
 print(qc.draw())
 
 # 3. Controlled Rotations
+qc = QuantumCircuit(2)
+theta = pi # theta can be anything (pi chosen arbitrarily)
+qc.ry(theta/2,t)
+qc.cx(c,t)
+qc.ry(-theta/2,t)
+qc.cx(c,t)
+print(qc.draw())
+
+A = Gate('A', 1, [])
+B = Gate('B', 1, [])
+C = Gate('C', 1, [])
+alpha = 1 # arbitrarily define alpha to allow drawing of circuit
+
+qc = QuantumCircuit(2)
+qc.append(C, [t])
+qc.cz(c,t)
+qc.append(B, [t])
+qc.cz(c,t)
+qc.append(A, [t])
+qc.p(alpha,c)
+print(qc.draw())
+
+# 4. The Toffoli 
+qc = QuantumCircuit(3)
+a = 0
+b = 1
+t = 2
+# Toffoli with control qubits a and b and target t
+qc.ccx(a,b,t)
+print(qc.draw())
+
+qc = QuantumCircuit(3)
+qc.cp(theta,b,t)
+qc.cx(a,b)
+qc.cp(-theta,b,t)
+qc.cx(a,b)
+qc.cp(theta,a,t)
+print(qc.draw())
+
+qc = QuantumCircuit(3)
+qc.ch(a,t)
+qc.cz(b,t)
+qc.ch(a,t)
+print(qc.draw())
+
+# 5. Arbitrary rotations from H and T 
+qc = QuantumCircuit(1)
+qc.t(0) # T gate on qubit 0
+print(qc.draw())
+
+qc = QuantumCircuit(1)
+qc.h(0)
+qc.t(0)
+qc.h(0)
+print(qc.draw())
+
+qc = QuantumCircuit(1)
+qc.h(0)
+qc.t(0)
+qc.h(0)
+qc.t(0)
+print(qc.draw())
+
+qc = QuantumCircuit(1)
+qc.t(0)
+qc.h(0)
+qc.t(0)
+qc.h(0)
+print(qc.draw())
 

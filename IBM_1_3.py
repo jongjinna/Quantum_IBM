@@ -35,7 +35,7 @@ sim = Aer.get_backend('aer_simulator')  # Tell Qiskit how to simulate our circui
 
 # initial_state = [1/sqrt(2), 1j/sqrt(2)]  # Define state |q_0>
 
-# qc = QuantumCircuit(1) # Must redefine qc
+qc = QuantumCircuit(1) # Must redefine qc
 # qc.initialize(initial_state, 0) # Initialize the 0th qubit in the state `initial_state`
 # qc.save_statevector() # Save statevector
 # qobj = assemble(qc)
