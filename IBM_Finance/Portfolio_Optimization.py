@@ -69,6 +69,8 @@ def print_result(result):
         probability = probabilities[i]
         print("%10s\t%.4f\t\t%.4f" % (x, value, probability))
 
+
+# NumPyMinimumEigensolver (as a classical reference)
 exact_mes = NumPyMinimumEigensolver()
 exact_eigensolver = MinimumEigenOptimizer(exact_mes)
 
@@ -76,6 +78,7 @@ result = exact_eigensolver.solve(qp)
 
 print_result(result)
 
+# Solution using VQE
 from qiskit.utils import algorithm_globals
 
 algorithm_globals.random_seed = 1234
@@ -91,6 +94,7 @@ result = vqe.solve(qp)
 
 print_result(result)
 
+# Solution using QAOA
 algorithm_globals.random_seed = 1234
 backend = Aer.get_backend("statevector_simulator")
 
@@ -102,4 +106,3 @@ qaoa = MinimumEigenOptimizer(qaoa_mes)
 result = qaoa.solve(qp)
 
 print_result(result)
-
